@@ -1,0 +1,12 @@
+{
+  "name": "music-map",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "web/*",
+      "web/backend/*"
+    ],
+    "nohoist": ["**/@nestjs", "**/@nestjs/**"]
+  }
+}
