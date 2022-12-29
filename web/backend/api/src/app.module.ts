@@ -3,9 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+// import { PbEnv } from '@config/environments/pb-env.service';
 import { UsersModule } from './components/users/users.module';
 import * as path from 'path';
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import { PrismaService } from '@prisma-service';
 
 @Module({
   imports: [
@@ -19,6 +21,11 @@ import * as path from 'path';
     UsersModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PrismaService],
 })
 export class AppModule {}
+
+// GraphQLModule.forRootAsync<ApolloDriverConfig>({
+//   inject: [PbEnv],
+//   useFactory: (env: PbEnv) => env.ApolloDriverConfigFactory,
+// }),

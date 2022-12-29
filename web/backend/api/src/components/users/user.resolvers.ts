@@ -1,22 +1,13 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { UserModel } from './interfaces/user.model';
+import { PrismaService } from '@prisma-service';
 
 @Resolver((of) => UserModel)
 export class UserResolver {
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  // constructor() {}
+  constructor(private prisma: PrismaService) {}
 
   @Query(() => [UserModel], { name: 'users', nullable: true })
   async getUsers() {
-    return [
-      {
-        id: 't1',
-        title: 'tt1',
-      },
-      {
-        id: 't2',
-        title: 'tt2',
-      },
-    ];
+    return this.prisma.users.findMany();
   }
 }

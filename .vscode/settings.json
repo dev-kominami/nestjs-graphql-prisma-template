@@ -1,8 +1,5 @@
 {
-  "editor.defaultFormatter": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "[prisma]": { "editor.defaultFormatter": "Prisma.prisma"},
+  "[prisma]": { "editor.defaultFormatter": "Prisma.prisma" }
 }
