@@ -7,7 +7,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UsersModule } from './components/users/users.module';
 import * as path from 'path';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
-import { PrismaService } from '@prisma-service';
+import { ConfigModule } from '@nestjs/config';
+import { PrismaModule } from '@prisma-module/prisma.module';
 
 @Module({
   imports: [
@@ -18,10 +19,15 @@ import { PrismaService } from '@prisma-service';
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
+    ConfigModule.forRoot({
+      envFilePath: ['.env.development.local'],
+      isGlobal: true,
+    }),
+    PrismaModule,
     UsersModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, PrismaService],
+  // controllers: [AppController],
+  // providers: [PrismaService],
 })
 export class AppModule {}
 
