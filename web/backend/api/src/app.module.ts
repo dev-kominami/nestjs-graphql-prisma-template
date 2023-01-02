@@ -9,29 +9,21 @@ import * as path from 'path';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from '@prisma-module/prisma.module';
+import { EnvModule } from './config/environments/env.module';
+import { EnvService } from './config/environments/env.service';
 
 @Module({
   imports: [
-    GraphQLModule.forRoot<ApolloDriverConfig>({
+    GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: path.join(process.cwd(), 'src/schema.gql'),
-      sortSchema: true,
-      playground: false,
-      plugins: [ApolloServerPluginLandingPageLocalDefault()],
-    }),
-    ConfigModule.forRoot({
-      envFilePath: ['.env.development.local'],
-      isGlobal: true,
+      inject: [EnvService],
+      useFactory: (env: EnvService) => env.ApolloDriverConfigFactory,
     }),
     PrismaModule,
     UsersModule,
+    EnvModule,
   ],
   // controllers: [AppController],
   // providers: [PrismaService],
 })
 export class AppModule {}
-
-// GraphQLModule.forRootAsync<ApolloDriverConfig>({
-//   inject: [PbEnv],
-//   useFactory: (env: PbEnv) => env.ApolloDriverConfigFactory,
-// }),
