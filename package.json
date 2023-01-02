@@ -7,11 +7,15 @@
       "web/*",
       "web/backend/*"
     ],
-    "nohoist": ["**/@nestjs", "**/@nestjs/**"]
+    "nohoist": [
+      "**/@nestjs",
+      "**/@nestjs/**"
+    ]
   },
   "scripts": {
     "api": "yarn workspace api",
     "api:start:dev": "yarn api start:dev",
+    "api:test": "yarn api test",
     "prisma:generate": "yarn api prisma generate",
     "prisma:seed": "yarn api prisma:seed",
     "prisma:studio": "yarn api prisma:studio"
