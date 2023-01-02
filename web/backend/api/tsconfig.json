@@ -20,7 +20,8 @@
     "paths": {
       "@prisma-module/*": ["src/prisma/*"],
       "@components/*": ["src/components/*"],
-      "@config/*": ["src/config/*"]
+      "@config/*": ["src/config/*"],
+      "@test/*": ["test/*"]
     }
   }
 }
